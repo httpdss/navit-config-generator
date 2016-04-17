@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config
+SYSTEM "navit.dtd">
+<config xmlns:xi="http://www.w3.org/2001/XInclude" language="{{default_language}}">
+
+    {% include "includes/plugins.xml" %}
+    {% include "includes/debug_params.xml" %}
+
+    <navit osd_configuration="1"
+           center="{{ navit.center }}"
+           autozoom_active="0"
+           autozoom="15"
+           zoom="16"
+           tracking="1"
+           orientation="-1"
+           recent_dest="250"
+           pitch="{{ navit.pitch }}">
+
+        <graphics type="gtk_drawing_area"/>
+
+        <gui type="internal"
+             on_map_click='menu("#Map Point")'
+             enabled="yes"
+             font_size="500"
+             icon_xs="48"
+             icon_s="48"
+             icon_l="64"
+             background_color="#133435ff"
+             font="{{ default_font }}"><![CDATA[{% include "includes/main_menu.xml" %}]]>
+        </gui>
+
+        {% include "includes/osd.xml" %}
+        
+        {% include "includes/vehicles.xml" %}
+        {% include "includes/vehicleprofile-car.xml" %}
+        {% include "includes/vehicleprofile-car-shortest.xml" %}
+
+        <tracking cdf_histsize="0"/>
+        <route destination_distance="50"/>
+
+        <navigation>
+            <announce type="street_0,street_1_city"
+                      level0="25"
+                      level1="100"
+                      level2="200"
+                      unit="m"/>
+            <announce type="street_2_city,street_3_city,street_4_city,ramp"
+                      level0="50"
+                      level1="200"
+                      level2="500"
+                      unit="m"/>
+            <announce type="highway_city,street_1_land,street_2_land,street_3_land,street_4_land"
+                      level0="100"
+                      level1="400"
+                      level2="1000"
+                      unit="m"/>
+            <announce type="street_n_lanes,highway_land"
+                      level0="300"
+                      level1="1000"
+                      level2="2000"
+                      unit="m"/>
+        </navigation>
+
+        <speech type="cmdline" data="espeak '%s'" cps="1"/>
+
+        <!-- Mapset templates -->
+        <mapset enabled="yes">
+            <map type="binfile"
+                 enabled="yes"
+                 data="map.bin"/>
+            <!-- <map type="csv" enabled="yes" data="speed_cam.txt" item_type="tec_common" attr_types="position_longitude,position_latitude,tec_type,maxspeed,tec_dirtype,tec_direction" /> -->
+        </mapset>
+
+        <layer name="Found items" order="0-">
+            <itemgra item_types="found_item">
+                <circle color="#008080" radius="24" width="2" text_size="12"/>
+            </itemgra>
+        </layer>
+
+        <!-- If you dont want to use the sample map, either set enabled="no" in the next line or remove the xml file from the maps directory -->
+        <mapset enabled="no">
+            <xi:include href="$NAVIT_SHAREDIR/maps/*.xml"/>
+        </mapset>
+
+        {% include "includes/layout-day.xml" %}
+        {% include "includes/layout-night.xml" %}
+    </navit>
+</config>

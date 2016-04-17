@@ -1,0 +1,182 @@
+<!-- <osd enabled="no"
+     type="speed_cam"
+     h="40" 
+     w="550"
+     x="30"
+     y="350"
+     font_size="450"
+     text_color="#00FF00"
+     label="${distance} | ${camera_type} | ${camera_dir} | ${direction} | ${speed_limit}"/> -->
+
+<osd name="ifroute"
+     update_period="2"
+     type="cmd_interface"
+     h="1"
+     w="1"
+     x="-1"
+     y="-1"
+     command='osd_configuration=route.route_status==0 ? 1 : 2' />
+<!-- for a debug log
+-->
+<!-- osd items allow to position display and control items directly on top of the map: -->
+<!-- TOP LEFT -->
+<!-- Distance to Next Maneouvre -->
+<osd enabled="yes"
+     type="text"
+     label="${navigation.item[1].length[named]}"
+     x="0" y="0" w="75" h="40"
+     font_size="350"
+     align="0"
+     background_color="#133435c8"
+     osd_configuration="2"/>
+
+<!-- Next Maneouvre Icon -->
+<osd enabled="yes"
+     type="navigation_next_turn"
+     w="80"
+     x="0"
+     y="40"
+     background_color="#133435c8"
+     osd_configuration="2"/>
+<!-- Next Road -->
+<osd enabled="yes"
+     type="text"
+     label="${navigation.item[1].street_name} ${navigation.item[1].street_name_systematic}"
+     h="40"
+     w="750"
+     x="75"
+     y="0"
+     font_size="350"
+     align="4"
+     background_color="#133435c8"
+     osd_configuration="2" />
+
+<!-- TOP RIGHT -->
+<!-- Odometer -->
+<!-- GPS Status -->
+<osd enabled="yes"
+     type="gps_status"
+     h="30"
+     w="45"
+     x="-50"
+     y="5"
+     background_color="#00000000"
+     osd_configuration="2" />
+
+<!-- BOTTOM -->
+<!-- Compass -->
+<!-- Current Altitude -->
+<!-- Current Direction -->
+<!-- Current Street -->
+<osd enabled="yes"
+     type="text"
+     label="${tracking.item.street_name} ${tracking.item.street_name_systematic}"
+     h="40"
+     w="764" 
+     x="80"
+     y="-40"
+     font_size="300"
+     align="4"
+     background_color="#133435ff"/>
+
+<osd enabled="yes"
+     type="text"
+     label="${vehicle.position_speed[value]}"
+     h="50"
+     w="60"
+     x="-100"
+     y="-80"
+     font_size="400"
+     background_color="#133435ff"
+     align="10"/>
+<osd enabled="yes"
+     type="text"
+     label="${vehicle.position_speed[unit]}"
+     h="40"
+     w="40"
+     x="-40"
+     y="-80"
+     font_size="150"
+     background_color="#133435ff"
+     align="6" />
+<osd enabled="yes"
+     type="text"
+     label="${navigation.item.destination_time[remaining]}/${navigation.item.destination_time[arrival]}"
+     x="-100"
+     y="-100"
+     h="30"
+     w="100"
+     font_size="220"
+     background_color="#133435ff"
+     align="10"
+     osd_configuration="2" />
+<osd enabled="yes"
+     type="text"
+     label="${navigation.item.destination_length[named]}"
+     h="30"
+     w="100"
+     x="-100"
+     y="-120"
+     font_size="220"
+     background_color="#133435ff"
+     align="10"
+     osd_configuration="2" />
+
+<osd enabled="yes"
+     type="speed_warner"
+     speed_exceed_limit_offset="15"
+     speed_exceed_limit_percent="10"
+     announce_on="1"
+     background_color="#00000000"
+     label="text_only"
+     align="10"
+     h="25"
+     w="50"
+     x="-63"
+     y="-75"
+     font_size="250" />
+
+
+<!-- RIGHT CONTROLS -->
+<osd type="button"
+     command="zoom_in()"
+     src="add-circle.svg"
+     x="0" y="-80" h="40" w="40"
+     use_overlay="1"
+     accesskey="="
+     background_color="#133435ff" />
+<osd type="button"
+     command="zoom_out()"
+     x="40" y="-80" h="40" w="40"
+     src="remove-circle.svg"
+     use_overlay="1"
+     accesskey="-"
+     background_color="#133435ff"/>
+<osd type="button"
+     command="zoom_to_route()"
+     x="0" y="-40" h="40" w="40"
+     src="directions.svg"
+     background_color="#133435ff"
+     use_overlay="1"
+     accesskey="r"/>
+<osd type="button"
+     command="pitch=pitch==0?20:0;orientation=pitch==0?0:-1;zoom=pitch==0?200:15"
+     x="40" y="-40" w="40" h="40"
+     src="d-rotation.svg"
+     use_overlay="1"
+     accesskey="d"
+     background_color="#133435ff"
+     enabled="yes"/>
+
+<!-- 
+
+<log enabled="no" type="textfile_debug" data="debug_%Y%m%d-%i.txt" flush_size="1000" flush_time="30"/>
+<osd enabled="no" type="text" label="Br Jose Gervacio Artigas" x="75" y="0" font_size="300" w="493" h="40" align="4" background_color="#00000000" osd_configuration="2" />
+<osd enabled="no" type="odometer" w="125" h="20"  x="-125" y="40" font_size="250" label="AVG ${avg_spd}" background_color="#133435c8" align="8" name="persistent_odometer_1" osd_configuration="2" />
+<osd enabled="no" type="compass" x="0" y="-120" w="60" h="80" background_color="#000000c8"/>
+<osd enabled="no" type="text" label="ALT ${vehicle.position_height}" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
+<osd enabled="no" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#044400c8"/>
+<osd enabled="no" type="text" label="34:33/34:44" x="-100" y="-100" font_size="200" w="100" h="30" background_color="#133435ff" align="10" osd_configuration="2"/>
+<osd enabled="no" type="text" label="3442m" x="-100" y="-120" font_size="200" w="100" h="30" background_color="#133435ff" align="10" osd_configuration="2"/>
+<osd enabled="no" type="text" label="110" background_color="#00000000" align="10" x="-63" y="-75" font_size="250" w="50" h="25" />
+ -->

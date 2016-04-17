@@ -1,0 +1,210 @@
+<html>
+    <a name="Main Menu">
+        <text>Inicio</text>
+        <a href="#Actions">
+            <img src="gui_actions">Acciones</img>
+        </a>
+        <img cond="flags&amp;2"
+             src="gui_map"
+             onclick="back_to_map()">
+            <text>Mostrar Mapa</text>
+        </img>
+        <a href="#Settings">
+            <img src="gui_settings">
+                <text>Configuración</text>
+            </img>
+        </a>
+        <a href="#Route">
+            <img src="gui_maps">
+                <text>Camino</text>
+            </img>
+        </a>
+        <img src="gui_quit"
+             onclick="quit()">
+            <text>Salir</text>
+        </img>
+        <img cond="navit.route.route_status&amp;1"
+             src="gui_stop"
+             onclick="abort_navigation();refresh()">
+            <text>Parar Navegación</text>
+        </img>
+    </a>
+    <a name="Actions">
+        <text>Acciones</text>
+        <img src="gui_bookmark"
+             onclick="bookmarks()">
+            <text>Marcadores</text>
+        </img>
+        <img src="gui_formerdests"
+             onclick="formerdests()">
+            <text>Destinos Anteriores</text>
+        </img>
+        <img cond="click_coord_geo"
+             src="gui_map"
+             onclick="position(click_coord_geo,_(&quot;Map Point&quot;),8|16|32|64|256)">
+            <script>write(click_coord_geo)</script>
+        </img>
+        <img cond="position_coord_geo"
+             src="gui_vehicle"
+             onclick="position(position_coord_geo,_(&quot;Vehicle Position&quot;),8|32|64|128|256)">
+            <script>write(position_coord_geo)</script>
+        </img>
+        <img src="gui_town"
+             onclick="town()">
+            <text>Town</text>
+        </img>
+        <img src="gui_map"
+             onclick="enter_coord()">
+            <text>Coordinates</text>
+        </img>
+    </a>
+    <a name="Settings">
+        <text>Settings</text>
+        <a href="#Settings Display">
+            <img src="gui_display">
+                <text>Display</text>
+            </img>
+        </a>
+        <img src="gui_maps"
+             onclick="setting_maps()">
+            <text>Maps</text>
+        </img>
+        <!-- <a href='#Settings Maps'><img src='gui_maps'><text>Maps</text></img></a> -->
+        <img src="gui_vehicle"
+             onclick="setting_vehicle()">
+            <text>Vehicle</text>
+        </img>
+        <!-- <a href='#Settings Vehicles'><img src='gui_vehicle'><text>Vehicle</text></img></a> -->
+        <img src="gui_rules"
+             onclick="setting_rules()">
+            <text>Rules</text>
+        </img>
+        <a href="#Satellite Status">
+            <img src="gui_display">
+                <text>Satellite Status</text>
+            </img>
+        </a>
+    </a>
+    <a name="Settings Display">
+        <text>Display</text>
+        <!-- <img src='gui_display' onclick='setting_layout()'><text>Layout</text></img> -->
+        <a href="#Settings Layouts">
+            <img src="gui_display">
+                <text>Layout</text>
+            </img>
+        </a>
+        <img cond="fullscreen==0"
+             src="gui_fullscreen"
+             onclick="fullscreen=1">
+            <text>Fullscreen</text>
+        </img>
+        <img cond="fullscreen==1"
+             src="gui_leave_fullscreen"
+             onclick="fullscreen=0">
+            <text>Window Mode</text>
+        </img>
+        <img cond="navit.pitch==0"
+             src="gui_map"
+             onclick="navit.pitch=pitch;redraw_map();back_to_map()">
+            <text>3D</text>
+        </img>
+        <img cond="navit.pitch!=0"
+             src="gui_map"
+             onclick="navit.pitch=0;redraw_map();back_to_map()">
+            <text>2D</text>
+        </img>
+        <img cond="navit.autozoom_active!=0"
+             src="gui_active"
+             onclick="navit.autozoom_active=0;redraw_map();back_to_map()">
+            <text>AutoZoom</text>
+        </img>
+        <img cond="navit.autozoom_active==0"
+             src="gui_stop"
+             onclick="navit.autozoom_active=1;redraw_map();back_to_map()">
+            <text>AutoZoom</text>
+        </img>
+    </a>
+    <a name="Tools">
+        <text>Tools</text>
+        <img src="gui_actions"
+             onclick="locale()">
+            <text>Show Locale</text>
+        </img>
+    </a>
+    <a name="Route">
+        <text>Route</text>
+        <img src="gui_actions"
+             onclick="route_description()">
+            <text>Description</text>
+        </img>
+        <img src="gui_actions"
+             onclick="route_height_profile()">
+            <text>Height Profile</text>
+        </img>
+        <img cond="navit.waypoints_flag &amp;&amp; (navit.route.route_status&amp;1)"
+             src="cursor_still"
+             onclick="waypoints()">
+            <text>Waypoints</text>
+        </img>
+        <img cond="navit.waypoints_flag &amp;&amp; (navit.route.route_status&amp;1)"
+             src="gui_stop"
+             onclick="navit.route_remove_last_waypoint()">
+            <text>Drop last Waypoint</text>
+        </img>
+        <img cond="navit.waypoints_flag &amp;&amp; (navit.route.route_status&amp;1)"
+             src="gui_stop"
+             onclick="navit.route_remove_next_waypoint()">
+            <text>Drop next Waypoint</text>
+        </img>
+    </a>
+    <a name="Map Point">
+        <text>Map Point</text>
+        <script>
+            position(click_coord_geo,_("Map Point"),8|16|32|64|256)
+        </script>
+    </a>
+    <a name="Settings Layouts" class="clist" refresh_cond="navit.layout">
+        <text>Layout</text>
+        <script>
+            foreach(layout;navit.layout)
+                img("centry", navit.layout==layout?"gui_active":"gui_inactive", layout.name,"", "navit.layout=navit.layout[@name==%{se}*]", layout.name);
+        </script>
+    </a>
+    <a name="Settings Maps" class="clist">
+        <text>Maps</text>
+        <script>
+            foreach(map;navit.mapset.map)
+                if (map.description)
+                    img("centry",map.active?"gui_active":"gui_inactive", map.description, "","navit.mapset.map[@description==%{se}].active=%{d}*",map.description,!map.active,"redraw_map();refresh();");
+                else
+                    img("centry",map.active?"gui_active":"gui_inactive", map.type+":"+map.data, "","navit.mapset.map[@data==%{se}].active=%{d}*",map.data,!map.active,"redraw_map();refresh();");
+        </script>
+    </a>
+    <a name="Settings Vehicles" class="clist">
+        <text>Vehicle</text>
+        <script>
+            foreach(vehicle;navit.vehicle)
+                img("centry",navit.vehicle==vehicle?"gui_active":"gui_inactive",vehicle.name, "name=%{se};menu(\"#Settings Vehicle\")",vehicle.name);
+        </script>
+    </a>
+    <a name="Settings Vehicle" class="clist">
+        <script>write(name)</script>
+        <script>
+            foreach(vehicle;navit.vehicle)
+                if (vehicle.name == name) {
+                    if (vehicle!=navit.vehicle)
+                        img("centry","gui_active","Set as active", "","navit.vehicle=navit.vehicle[@name==%{se}*]",name);
+                    foreach(vehicleprofile;navit.vehicleprofile)
+                        img("centry",vehicle.profilename==vehicleprofile.name?"gui_active":"gui_inactive",vehicleprofile.name, "","navit.vehicle[@name=%{se}].profilename=%{se}*",name,vehicleprofile.name,"refresh()");
+                }
+        </script>
+    </a>
+    <a name="Satellite Status" class="clist">
+        <text>Satellite Status</text>
+        <script>satellite_status_page()</script>
+    </a>
+    <a name="NMEA Data" class="clist">
+        <text>NMEA Data</text>
+        <script>nmea_data_page()</script>
+    </a>
+</html>

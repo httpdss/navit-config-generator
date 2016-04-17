@@ -1,0 +1,58 @@
+<cursor w="44" h="44">
+    <itemgra speed_range="-2">
+        <circle color="#6A6A6B" radius="22" width="22" />
+        <circle color="#EEEEEE" radius="20" width="20" />
+        <polygon color="#2669D1">
+            <coord x="-14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="-14" y="-12" />
+        </polygon>
+        <polygon color="#2669D1">
+            <coord x="14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="14" y="-12" />
+        </polygon>
+        <polyline color="#2669D1" width="2">
+            <coord x="-14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="-14" y="-12" />
+        </polyline>
+        <polyline color="#2669D1" width="2">
+            <coord x="14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="14" y="-12" />
+        </polyline>
+    </itemgra>
+    <itemgra speed_range="3-">
+        <circle color="#6A6A6B" radius="22" width="22" />
+        <circle color="#EEEEEE" radius="20" width="20" />
+        <polygon color="#2669D1">
+            <coord x="-14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="-14" y="-12" />
+        </polygon>
+        <polygon color="#2669D1">
+            <coord x="14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="14" y="-12" />
+        </polygon>
+        <polyline color="#2669D1" width="2">
+            <coord x="-14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="-14" y="-12" />
+        </polyline>
+        <polyline color="#2669D1" width="2">
+            <coord x="14" y="-12" />
+            <coord x="0" y="14" />
+            <coord x="0" y="-6" />
+            <coord x="14" y="-12" />
+        </polyline>
+    </itemgra>
+</cursor>

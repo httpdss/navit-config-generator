@@ -1,0 +1,27 @@
+<vehicle name="Local GPS"
+         profilename="car"
+         enabled="yes"
+         active="1"
+         source="gpsd://localhost"
+         gpsd_query="w+xj"
+         follow="1">
+    <log enabled="yes"
+         type="textfile"
+         data="tracklog.txt"
+         overwrite="1"
+         flush_size="1000"
+         flush_time="5" />
+</vehicle>
+<vehicle name="Demo"
+         profilename="car"
+         enabled="no"
+         active="0"
+         source="demo://"
+         follow="1">
+    <log enabled="no"
+         type="textfile"
+         data="tracklog.txt"
+         overwrite="1"
+         flush_size="1000"
+         flush_time="5" />
+</vehicle>
